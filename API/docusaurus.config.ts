@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { ScalarOptions } from '@scalar/docusaurus'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -65,6 +66,20 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+  
+  plugins: [
+    [
+      '@scalar/docusaurus',
+      {
+        label: 'Scalar',
+        route: '/scalar',
+        showNavLink: true, // optional, default is true
+        configuration: {
+          url: 'https://registry.scalar.com/@scalar/apis/galaxy?format=yaml',
+        },
+      } as ScalarOptions,
     ],
   ],
 
