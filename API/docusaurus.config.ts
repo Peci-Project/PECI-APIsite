@@ -5,10 +5,36 @@ import type { ScalarOptions } from '@scalar/docusaurus'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+/* Configuração geral para a documentação dos serviços */
+const commonScalarConfig = {
+  hideClientButton: true,
+  hideTestRequest: true,
+  hideModels: true,
+  customCss: `
+    /* Esconde o segundo badge (OAS 3.0.0) */
+    .flex.gap-1\\.5 .badge:nth-of-type(2) { 
+      display: none !important; 
+    }
+
+    /* Esconde o download e as client libraries */
+    .download-container, .scalar-reference-intro-clients { 
+      display: none !important; 
+    }
+
+    /* Esconde o Ask AI Agent (usando a classe exata do teu print) */
+    .agent-button-container,
+    .ask-agent-scalar-input,
+    .ask-agent-scalar-send,
+    [class*="agent-button"] {
+      display: none !important;
+    }
+  `,
+};
+
 const config: Config = {
-  title: 'My Site',
+  title: 'API',
   tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/ua.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -44,23 +70,6 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -70,89 +79,117 @@ const config: Config = {
   ],
   
   plugins: [
+    /* Lista de serviços */
     [
       '@scalar/docusaurus',
       {
-        label: 'Scalar',
-        route: '/scalar',
-        showNavLink: true, // optional, default is true
+        id: 'edificios',
+        label: 'Edifícios',
+        route: '/api/edificios',
+        showNavLink: false,
         configuration: {
-          url: 'https://registry.scalar.com/@scalar/apis/galaxy?format=yaml',
+          url: '/openAPI-edificios.yaml',
+          metaData: { title: 'ArcGis',},
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,    
+    ],
+    [
+      '@scalar/docusaurus',
+      {
+        id: 'parques',
+        label: 'Parques',
+        route: '/api/parques',
+        showNavLink: false,
+        configuration: {
+          url: '/openAPI-parques.yaml',
+          metaData: { title: 'Parques', },
+          ...commonScalarConfig,
         },
       } as ScalarOptions,
+    ],
+    [
+      '@scalar/docusaurus',
+      {
+        id: 'senhas',
+        label: 'Senhas',
+        route: '/api/senhas',
+        showNavLink: false,
+        configuration: {
+          url: '/openAPI-senhas.yaml',
+          metaData: { title: 'SAC',},
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,    
+    ],
+    [
+      '@scalar/docusaurus',
+      {
+        id: 'ementas',
+        label: 'Ementas',
+        route: '/api/ementas',
+        showNavLink: false,
+        configuration: {
+          url: '/openAPI-ementas.yaml',
+          metaData: { title: 'SAS',},
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,    
     ],
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // Alterar o social card
+    image: 'img/social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
+      title: 'Home',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'UA Logo',
+        src: 'img/ua.png',
       },
       items: [
+        /* Dropdown de serviços na nav bar */
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          type: 'dropdown',
+          label: "Serviços",
           position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+          items: [
+          { label: 'Edifícios', to: '/api/edificios' },
+          { label: 'Parques', to: '/api/parques' },
+          { label: 'Senhas', to: '/api/senhas' },
+          { label: 'Ementas', to: '/api/ementas' },
+          ]
+        }
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: "API's",
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Edifícios',
+              to: '/api/edificios',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Parques',
+              to: '/api/parques',
             },
             {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Senhas',
+              to: '/api/senhas',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Ementas',
+              to: '/api/ementas',
             },
           ],
         },
       ],
+      // Mudar o copyright
       copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },
     prism: {

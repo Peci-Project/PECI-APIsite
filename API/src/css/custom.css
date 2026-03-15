@@ -6,25 +6,105 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
+  --ifm-color-primary: #55b900; 
+  --ifm-color-primary-dark: #4da700;
+  --ifm-color-primary-darker: #499e00;
+  --ifm-color-primary-darkest: #3c8200;
+  --ifm-color-primary-light: #62d100;
+  --ifm-color-primary-lighter: #68de00;
+  --ifm-color-primary-lightest: #7dfa12;
+  --ifm-footer-background-color: #2b3137;
+  --ifm-footer-color: #e3e3e3; 
+  --ifm-footer-title-color: #e3e3e3;
+  --ifm-footer-link-color: #e3e3e3;
+  --ifm-card-background-color: #ffffff;
+  --api-section-bg: #fdfdfe;
+  --api-dropdown-hover: #f5f6f7;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #62d100; 
+  --ifm-color-primary-dark: #55b900;
+  --ifm-color-primary-darker: #4da700;
+  --ifm-color-primary-darkest: #3c8200;
+  --ifm-color-primary-light: #72f300;
+  --ifm-color-primary-lighter: #7dfa12;
+  --ifm-color-primary-lightest: #a1ff54;
+  --ifm-footer-background-color: #2b3137;
+  --ifm-footer-color: #e3e3e3;
+  --ifm-footer-title-color: #e3e3e3;
+  --ifm-footer-link-color: #e3e3e3;
+  --ifm-card-background-color: #242526;
+  --api-section-bg: #1b1b1d;
+  --api-dropdown-hover: #303337;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+
+.navbar__item {
+  transition: all 0.3s ease-in-out;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+}
+
+.navbar__item:hover {
+  background-color: var(--api-dropdown-hover);
+}
+
+.navbar__link:hover {
+  color: inherit !important;
+}
+
+.navbar__title {
+  transition: all 0.3s ease-in-out; 
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+}
+
+.navbar__title:hover {
+  background-color: var(--api-dropdown-hover);
+}
+
+.navbar__brand:hover {
+  color: inherit !important;
+}
+
+
+.dropdown__menu {
+  background-color: var(--ifm-card-background-color) !important;
+}
+
+
+/* Remove o botão AskAI */
+button[class*="bg-sidebar-b-search"] {
+  display: none !important;
+}
+
+button:has(svg + span), 
+button:contains("Ask AI") {
+    display: none !important;
+}
+
+/* Remove o "Powered by Scalar" */
+.scalar-footer,
+a[href*="scalar.com"],
+div[class*="flex items-center"] > a[href*="scalar.com"] {
+  display: none !important;
+}
+
+/* Remove o botão "Generate MCP" */
+div[class*="scalar-mcp-layer"],
+button[class*="mcp-button"] {
+  display: none !important;
+}
+
+/* Remove o footer nas páginas de documentação das API's */
+[class*="plugin-id-edificios"] .footer,
+[class*="plugin-id-parques"] .footer,
+[class*="plugin-id-senhas"] .footer,
+[class*="plugin-id-ementas"] .footer,
+[class*="api-reference"] .footer {
+  display: none !important;
 }

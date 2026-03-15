@@ -1,11 +1,49 @@
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
-}
-
 .featureSvg {
   height: 200px;
   width: 200px;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 3rem 0;
+  width: 100%;
+  background: var(--api-section-bg); 
+}
+
+.feature {
+  padding: 2rem;
+  background: var(--ifm-card-background-color); 
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw); 
+  margin: 10px;
+  transition: transform 0.3s ease;
+  color: var(--ifm-font-color-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
+
+.featureButtonWrapper :global(.button--primary) {
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+}
+
+.feature:hover {
+  .featureButtonWrapper :global(.button--primary) {
+    transform: translateY(-5px);
+  }
+}
+
+.featureContent {
+  flex-grow: 1;
+}
+
+.featureContent h3 {
+  margin-top: 1rem;
+}
+
+.featureButtonWrapper {
+  margin-top: 1.5rem;
 }

@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import Link from '@docusaurus/Link';
 
 type FeatureItem = {
   title: string;
@@ -9,48 +10,66 @@ type FeatureItem = {
   description: ReactNode;
 };
 
+/* Mudar as imagens */
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Edifícios',
+    Svg: require('@site/static/img/edificios-icon.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Fornece dados sobre as unidades e os edifícios da Universidade de Aveiro.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Parques de Estacionamento',
+    Svg: require('@site/static/img/parques-icon.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Fornece dados sobre os parques de estacionamento da Universidade de Aveiro.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Senhas dos Serviços Académicos',
+    Svg: require('@site/static/img/senhas-icon.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Permite obter informação sobre o estado das senhas dos Serviços Académicos da Universidade de Aveiro.
+      </>
+    ),
+  },
+  {
+    title: 'Ementas das Cantinas',
+    Svg: require('@site/static/img/ementas-icon.svg').default, 
+    description: (
+      <>
+        Este serviço permite obter informação sobre as ementas das diversas cantinas e snack-bar da Universidade de Aveiro.
       </>
     ),
   },
 ];
 
 function Feature({title, Svg, description}: FeatureItem) {
+  const apiLink = `/api/${title.split(' ')[0].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
+
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+    <div className={clsx('col col--4 margin-bottom--lg')}>
+      <div className={styles.feature}>
+        <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
+        </div>
+        
+        <div className={styles.featureContent}>
+          <Heading as="h3">{title}</Heading>
+          <p>{description}</p>
+        </div>
+
+        <div className={styles.featureButtonWrapper}>
+          <Link className="button button--primary" to={apiLink}>
+            Saber mais →
+          </Link>
+        </div>
       </div>
     </div>
   );

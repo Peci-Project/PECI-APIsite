@@ -1,0 +1,11 @@
+openapi: 3.0.0
+info:
+  title: Parques
+  version: 2.0.0
+  description: |
+    # Visão Geral
+    #
+    ...
+
+servers:
+  - url: http://services.web.ua.pt/...

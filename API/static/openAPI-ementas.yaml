@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Ementas
+  version: 2.0.0
+  description: |
+    # Visão Geral
+    #
+    Serviço RESTful que permite obter o menu das cantinas, snack-bares e restaurantes da Universidade de Aveiro.
+
+servers:
+  - url: http://services.web.ua.pt/sas
+
+paths:
+  /ementas:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Consultar Ementas
+      description: |
+        Devolve um ficheiro XML com o menu da(s) cantina(s).
+      parameters:
+        - name: place
+          in: query
+          description: Local da cantina.
+          schema:
+            type: string  
+            enum: [santiago, estga, esan, rest, all]
+        - name: date
+          in: query
+          description: Data da ementa.
+          schema:
+            type: string
+            enum: [day, week]
+        - name: format
+          in: query
+          description: Formato da resposta.
+          schema:
+            type: string
+            enum: [json, xml, jsonp]
+            default: json
+        - name: cb
+          in: query
+          description: Callback para JSONP (apenas se format=jsonp).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Exemplo de resposta
+          content:
+            # Atualizar isto
+            application/json:
+              examples:
+                ex1:
+                  summary: "GET http://services.web.ua.pt/sas/ementas?place=santiago"
+                  value:
+                    "@attributes": { "zone": "rest" }
+                    menu: { canteen: "Santiago", items: [...] }
+                ex2:
+                  summary: "GET http://services.web.ua.pt/sas/ementas?place=estga"
+                  value: 
+                    "@attributes": { "zone": "estga" }
+                    menu: { canteen: "ESTGA", items: [...] }
+
+  /ementas?help:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Ajuda
+      description: Mostra uma pequena descrição do serviço assim como a ligação para esta wiki.
+
+  /ementas?dump:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Dump
+      description: Permite obter todos os dados sobre as ementas desde o dia 19 de Dezembro de 2011, em formato CSV.
