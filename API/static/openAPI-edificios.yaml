@@ -5,7 +5,61 @@ info:
   description: |
     # Visão Geral
     #
-    ...
+    Este serviço disponibiliza informação sobre os edifícios e as unidades da Universidade de Aveiro
+    e inclui dados como coordenadas geográficas, pisos de cada edifício, infraestruturas 
+    e salas existentes em cada piso de um edifício, entre outras informações. 
 
 servers:
-  - url: http://services.web.ua.pt/...
+  - url: http://services.web.ua.pt/arcgis
+
+paths:
+  /arcgis:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar Endpoints
+      description: |
+        Apresenta uma lista com os diferentes endpoints existentes e respectiva indicação do edifício ou unidade que representam. 
+
+  /arcgis?op=edifícios:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar Edifícios
+      description: Retorna uma listagem com dados relativos a todos os edifícios. 
+  /arcgis?op=unidades:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar Unidades
+      description: Retorna uma listagem com dados relativos a todas as unidades.
+  /arcgis?op=pisos:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar Pisos
+      description: Apresenta uma lista com dados relativos aos pisos de um determinado edifício.
+  /arcgis?op=infraestruturas:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar infraestruturas
+      description: Retorna uma listagem com as infraestruturas existentes em cada um dos pisos de um edifício específico. 
+  /arcgis?op=salas:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar Salas
+      description: Devolve uma listagem com os dados associados às várias salas de um edifício específico. 
+  /arcgis?op=elementos:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar elementos
+      description: Apresenta uma lista com todos os tipos de elementos existentes em cada piso de um determinado edifício.
+  /arcgis?op=mapas:
+    get:
+      tags: 
+        - Operaçoẽs
+      summary: Listar mapas
+      description: Apresenta uma listagem de endereços que permitem visualizar mapas de pisos e infraestruturas de um determinado edifício. 
