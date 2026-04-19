@@ -3,8 +3,13 @@ info:
   title: Parques
   version: 2.0.0
   description: |
-    # Visão Geral
-    # API para acesso a dados de parques de estacionamento, incluindo capacidade, ocupação e localização.
+     # Visão Geral
+      Esta serviço fornece dados em tempo real sobre os parques de estacionamento disponíveis da Universidade de Aveiro. 
+      
+      ## Funcionalidades Principais 
+      - **Capacidade:** Consulta o número total de lugares, lugares ocupados e lugares livres em tempo real.
+      - **Localização:** Obtém as coordenadas exatas (Latitude e Longitude) das cancelas para o acesso aos parques.
+      - **Filtros:** Filtra resultados por parques específicos (como o P1 ou P5) ou por locais que ainda têm lugares livres.
 
 servers:
   - url: http://services.web.ua.pt/parques
