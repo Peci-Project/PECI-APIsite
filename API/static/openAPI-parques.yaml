@@ -4,8 +4,7 @@ info:
   version: 2.0.0
   description: |
     # Visão Geral
-    #
-    ...
+    # API para acesso a dados de parques de estacionamento, incluindo capacidade, ocupação e localização.
 
 servers:
   - url: http://services.web.ua.pt/parques
