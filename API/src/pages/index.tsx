@@ -15,7 +15,7 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          Documentação API's Univerdidade de Aveiro
+          Documentação API's Universidade de Aveiro
         </Heading>
         {/* Mudar ou retirar o subtítulo */}
         <p className="hero__subtitle">
