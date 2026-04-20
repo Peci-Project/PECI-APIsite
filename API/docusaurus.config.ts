@@ -218,4 +218,11 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 };
 
-export default config;
+export default {
+  url: 'https://peci-project.github.io',   // ex: https://carlosramos.github.io
+  baseUrl: '/PECI-APIsite/',         // ex: /meu-site/
+  organizationName: 'peci-project',         // o teu username do GitHub
+  projectName: 'PECI-APIsite',       // o nome exato do repositório
+  trailingSlash: false,
+
+};
