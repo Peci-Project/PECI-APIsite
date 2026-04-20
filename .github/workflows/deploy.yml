@@ -9,6 +9,9 @@ jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./API
     steps:
       - uses: actions/checkout@v4
         with:
@@ -17,6 +20,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: API/package-lock.json
       - name: Install dependencies
         run: npm ci
       - name: Build website
@@ -24,7 +28,7 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: API/build
 
   deploy:
     name: Deploy to GitHub Pages

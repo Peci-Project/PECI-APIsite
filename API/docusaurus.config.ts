@@ -224,5 +224,4 @@ export default {
   organizationName: 'Peci-Project',         // o teu username do GitHub
   projectName: 'PECI-APIsite',       // o nome exato do repositório
   trailingSlash: false,
-
 };
