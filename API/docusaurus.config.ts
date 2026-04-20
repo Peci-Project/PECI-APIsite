@@ -33,7 +33,6 @@ const commonScalarConfig = {
 
 const config: Config = {
   title: 'API',
-  tagline: 'Dinosaurs are cool',
   favicon: 'img/ua.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -41,16 +40,11 @@ const config: Config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  url: 'https://peci-project.github.io',
+  baseUrl: '/PECI-APIsite/',
+  organizationName: 'Peci-Project',
+  projectName: 'PECI-APIsite',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 
@@ -218,10 +212,4 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 };
 
-export default {
-  url: 'https://peci-project.github.io',   // ex: https://carlosramos.github.io
-  baseUrl: '/PECI-APIsite/',         // ex: /meu-site/
-  organizationName: 'Peci-Project',         // o teu username do GitHub
-  projectName: 'PECI-APIsite',       // o nome exato do repositório
-  trailingSlash: false,
-};
+export default config;
