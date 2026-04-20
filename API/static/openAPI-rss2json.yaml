@@ -1,0 +1,24 @@
+openapi: 3.0.0
+info:
+  title: Rss2json
+  version: 2.0.0
+  description: |
+    # Visão Geral
+    #
+    Serviço que converte um feed RSS para JSON.
+
+servers:
+  - url: http://services.web.ua.pt/rss2json
+
+paths:
+  /:
+    get:
+      summary: Converter RSS para JSON
+      description: Devolve um ficheiro JSON com o conteúdo do feed RSS especificado.
+      parameters:
+        - name: rss2json
+          in: query
+          required: true
+          description: URL do feed RSS a converter (codificado).
+          schema:
+            type: string

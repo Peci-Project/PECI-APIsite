@@ -136,6 +136,20 @@ const config: Config = {
         },
       } as ScalarOptions,    
     ],
+    [
+      '@scalar/docusaurus',
+      {
+        id: 'rss2json',
+        label: 'Rss2json',
+        route: '/api/rss2json',
+        showNavLink: false,
+        configuration: {
+          url: '/openAPI-rss2json.yaml',
+          metaData: { title: 'Rss2json', },
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,
+    ],
   ],
 
   themeConfig: {
@@ -161,6 +175,7 @@ const config: Config = {
           { label: 'Parques', to: '/api/parques' },
           { label: 'Senhas', to: '/api/senhas' },
           { label: 'Ementas', to: '/api/ementas' },
+          { label: 'Rss2json', to: '/api/rss2json' },
           ]
         }
       ],
@@ -185,6 +200,10 @@ const config: Config = {
             {
               label: 'Ementas',
               to: '/api/ementas',
+            },
+            {
+              label: 'Rss2json',
+              to: '/api/rss2json',
             },
           ],
         },
