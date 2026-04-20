@@ -3,6 +3,9 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import type { ScalarOptions } from '@scalar/docusaurus'
 
+const isProd = process.env.NODE_ENV === 'production';
+const baseUrl = isProd ? '/PECI-APIsite/' : '/';
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /* Configuração geral para a documentação dos serviços */
@@ -41,7 +44,7 @@ const config: Config = {
   },
 
   url: 'https://peci-project.github.io',
-  baseUrl: '/PECI-APIsite/',
+  baseUrl: baseUrl,
   organizationName: 'Peci-Project',
   projectName: 'PECI-APIsite',
   trailingSlash: false,
@@ -82,7 +85,7 @@ const config: Config = {
         route: '/api/edificios',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-edificios.yaml',
+          url: `${baseUrl}openAPI-edificios.yaml`,
           metaData: { title: 'ArcGis',},
           ...commonScalarConfig,
         },
@@ -96,7 +99,7 @@ const config: Config = {
         route: '/api/parques',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-parques.yaml',
+          url: `${baseUrl}openAPI-parques.yaml`,
           metaData: { title: 'Parques', },
           ...commonScalarConfig,
         },
@@ -110,7 +113,7 @@ const config: Config = {
         route: '/api/senhas',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-senhas.yaml',
+          url: `${baseUrl}openAPI-senhas.yaml`,
           metaData: { title: 'SAC',},
           ...commonScalarConfig,
         },
@@ -124,7 +127,7 @@ const config: Config = {
         route: '/api/ementas',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-ementas.yaml',
+          url: `${baseUrl}openAPI-ementas.yaml`,
           metaData: { title: 'SAS',},
           ...commonScalarConfig,
         },
@@ -138,7 +141,7 @@ const config: Config = {
         route: '/api/rss2json',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-rss2json.yaml',
+          url: `${baseUrl}openAPI-rss2json.yaml`,
           metaData: { title: 'Rss2json', },
           ...commonScalarConfig,
         },
