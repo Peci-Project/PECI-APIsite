@@ -152,10 +152,6 @@ paths:
                       Capacidade: 663
                       Ocupado: 317
                       Livre: 346
-  /occupancy:
-    get:
-      tags:
-        - Operações
 
   /parques/health:
     get:
