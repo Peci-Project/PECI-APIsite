@@ -156,7 +156,7 @@ const config: Config = {
 
   themeConfig: {
     // Alterar o social card
-    image: 'img/social-card.jpg',
+    image: 'img/social-card.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
