@@ -17,7 +17,7 @@ paths:
       summary: Converter RSS para JSON
       description: Devolve um ficheiro JSON com o conteúdo do feed RSS especificado.
       parameters:
-        - name: rss2json
+        - name: rss
           in: query
           required: true
           description: URL do feed RSS a converter (codificado).
