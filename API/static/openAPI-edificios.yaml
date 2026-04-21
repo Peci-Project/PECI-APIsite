@@ -11,6 +11,7 @@ info:
 
 servers:
   - url: http://services.web.ua.pt/arcgis
+  - url: http://127.0.0.1:8000/arcgis
 
 paths:
   /arcgis:

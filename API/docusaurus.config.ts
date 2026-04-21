@@ -3,12 +3,15 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import type { ScalarOptions } from '@scalar/docusaurus'
 
+const isProd = process.env.NODE_ENV === 'production';
+const baseUrl = isProd ? '/PECI-APIsite/' : '/';
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /* Configuração geral para a documentação dos serviços */
 const commonScalarConfig = {
   hideClientButton: true,
-  hideTestRequest: true,
+  hideTestRequest: false,
   hideModels: true,
   customCss: `
     /* Esconde o segundo badge (OAS 3.0.0) */
@@ -33,7 +36,6 @@ const commonScalarConfig = {
 
 const config: Config = {
   title: 'API',
-  tagline: 'Dinosaurs are cool',
   favicon: 'img/ua.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -41,16 +43,11 @@ const config: Config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  url: 'https://peci-project.github.io',
+  baseUrl: baseUrl,
+  organizationName: 'Peci-Project',
+  projectName: 'PECI-APIsite',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 
@@ -88,8 +85,9 @@ const config: Config = {
         route: '/api/edificios',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-edificios.yaml',
+          url: `${baseUrl}openAPI-edificios.yaml`,
           metaData: { title: 'ArcGis',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,    
@@ -102,8 +100,9 @@ const config: Config = {
         route: '/api/parques',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-parques.yaml',
+          url: `${baseUrl}openAPI-parques.yaml`,
           metaData: { title: 'Parques', },
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,
@@ -116,31 +115,48 @@ const config: Config = {
         route: '/api/senhas',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-senhas.yaml',
+          url: `${baseUrl}openAPI-senhas.yaml`,
           metaData: { title: 'SAC',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,    
     ],
     [
-      '@scalar/docusaurus',
+    '@scalar/docusaurus',
       {
         id: 'ementas',
         label: 'Ementas',
         route: '/api/ementas',
         showNavLink: false,
         configuration: {
-          url: '/openAPI-ementas.yaml',
+          url: `${baseUrl}openAPI-ementas.yaml`,
           metaData: { title: 'SAS',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
-      } as ScalarOptions,    
+      } as ScalarOptions,
+    ],
+    [
+      '@scalar/docusaurus',
+      {
+        id: 'rss2json',
+        label: 'Rss2json',
+        route: '/api/rss2json',
+        showNavLink: false,
+        configuration: {
+          url: `${baseUrl}openAPI-rss2json.yaml`,
+          metaData: { title: 'Rss2json', },
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,
     ],
   ],
 
   themeConfig: {
     // Alterar o social card
-    image: 'img/social-card.jpg',
+    image: 'img/social-card.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -161,6 +177,7 @@ const config: Config = {
           { label: 'Parques', to: '/api/parques' },
           { label: 'Senhas', to: '/api/senhas' },
           { label: 'Ementas', to: '/api/ementas' },
+          { label: 'Rss2json', to: '/api/rss2json' },
           ]
         }
       ],
@@ -185,6 +202,10 @@ const config: Config = {
             {
               label: 'Ementas',
               to: '/api/ementas',
+            },
+            {
+              label: 'Rss2json',
+              to: '/api/rss2json',
             },
           ],
         },

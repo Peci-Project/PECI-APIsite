@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  image: React.ComponentType<React.ComponentProps<'svg'>> | string;
   description: ReactNode;
 };
 
@@ -14,7 +14,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Edifícios',
-    Svg: require('@site/static/img/edificios-icon.svg').default,
+    image: require('@site/static/img/edificios-icon.png').default,
     description: (
       <>
         Fornece dados sobre as unidades e os edifícios da Universidade de Aveiro.
@@ -23,7 +23,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Parques de Estacionamento',
-    Svg: require('@site/static/img/parques-icon.svg').default,
+    image: require('@site/static/img/parques-icon.svg').default,
     description: (
       <>
         Fornece dados sobre os parques de estacionamento da Universidade de Aveiro.
@@ -32,7 +32,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Senhas dos Serviços Académicos',
-    Svg: require('@site/static/img/senhas-icon.svg').default,
+    image: require('@site/static/img/senhas-icon.svg').default,
     description: (
       <>
         Permite obter informação sobre o estado das senhas dos Serviços Académicos da Universidade de Aveiro.
@@ -41,23 +41,36 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Ementas das Cantinas',
-    Svg: require('@site/static/img/ementas-icon.svg').default, 
+    image: require('@site/static/img/ementas-icon.svg').default, 
     description: (
       <>
         Este serviço permite obter informação sobre as ementas das diversas cantinas e snack-bar da Universidade de Aveiro.
       </>
     ),
   },
+  {
+    title: 'Rss2json',
+    image: require('@site/static/img/ementas-icon.svg').default,
+    description: (
+      <>
+        Converte um feed RSS para JSON.
+      </>
+    ),
+  },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, image, description}: FeatureItem) {
   const apiLink = `/api/${title.split(' ')[0].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
 
   return (
     <div className={clsx('col col--4 margin-bottom--lg')}>
       <div className={styles.feature}>
         <div className="text--center">
-          <Svg className={styles.featureSvg} role="img" />
+          {typeof image === 'string' ? (
+            <img src={image} className={styles.featureSvg} role="img" alt={title} />
+          ) : (
+            (() => { const Svg = image; return <Svg className={styles.featureSvg} role="img" />; })()
+          )}
         </div>
         
         <div className={styles.featureContent}>

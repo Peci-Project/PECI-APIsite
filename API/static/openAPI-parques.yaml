@@ -12,6 +12,7 @@ info:
       - **Filtros:** Filtra resultados por parques específicos (como o P1 ou P5) ou por locais que ainda têm lugares livres.
 
 servers:
+  - url: http://127.0.0.1:8000/parques
   - url: http://services.web.ua.pt/parques
 
 paths:
@@ -151,6 +152,10 @@ paths:
                       Capacidade: 663
                       Ocupado: 317
                       Livre: 346
+  /occupancy:
+    get:
+      tags:
+        - Operações
 
   /parques/health:
     get:
