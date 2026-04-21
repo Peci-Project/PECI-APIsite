@@ -11,7 +11,7 @@ const baseUrl = isProd ? '/PECI-APIsite/' : '/';
 /* Configuração geral para a documentação dos serviços */
 const commonScalarConfig = {
   hideClientButton: true,
-  hideTestRequest: true,
+  hideTestRequest: false,
   hideModels: true,
   customCss: `
     /* Esconde o segundo badge (OAS 3.0.0) */
@@ -87,6 +87,7 @@ const config: Config = {
         configuration: {
           url: `${baseUrl}openAPI-edificios.yaml`,
           metaData: { title: 'ArcGis',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,    
@@ -101,6 +102,7 @@ const config: Config = {
         configuration: {
           url: `${baseUrl}openAPI-parques.yaml`,
           metaData: { title: 'Parques', },
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,
@@ -115,12 +117,13 @@ const config: Config = {
         configuration: {
           url: `${baseUrl}openAPI-senhas.yaml`,
           metaData: { title: 'SAC',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,    
     ],
     [
-      '@scalar/docusaurus',
+    '@scalar/docusaurus',
       {
         id: 'ementas',
         label: 'Ementas',
@@ -129,9 +132,10 @@ const config: Config = {
         configuration: {
           url: `${baseUrl}openAPI-ementas.yaml`,
           metaData: { title: 'SAS',},
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
-      } as ScalarOptions,    
+      } as ScalarOptions,
     ],
     [
       '@scalar/docusaurus',
@@ -143,6 +147,7 @@ const config: Config = {
         configuration: {
           url: `${baseUrl}openAPI-rss2json.yaml`,
           metaData: { title: 'Rss2json', },
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
           ...commonScalarConfig,
         },
       } as ScalarOptions,
