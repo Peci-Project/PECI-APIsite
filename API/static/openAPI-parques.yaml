@@ -152,6 +152,119 @@ paths:
                       Ocupado: 317
                       Livre: 346
 
+  /parques/health:
+    get:
+      tags:
+        - Operações
+      summary: Health
+      description: Verificação de disponibilidade do serviço.
+      responses:
+        '200':
+          description: Serviço operacional
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                ok:
+                  summary: Health check com sucesso
+                  value:
+                    status: ok
+                    wsdl: ParquesWS
+                    soap_operation: Lotacao
+
+  /parques/occupancy:
+    get:
+      tags:
+        - Operações
+      summary: List Occupancy
+      description: |
+        Retorna a ocupação atual de todos os parques.
+        Permite filtrar por nome do parque através do parâmetro `parque`.
+      parameters:
+        - name: parque
+          in: query
+          required: false
+          description: Nome do parque para filtrar resultados (case-insensitive).
+          schema:
+            type: string
+            nullable: true
+            example: Publico
+      responses:
+        '200':
+          description: Lista de ocupação dos parques
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LotacaoParque'
+              examples:
+                todos:
+                  summary: Ocupação de todos os parques
+                  value:
+                    - id: P1
+                      nome: Publico
+                      capacidade: 663
+                      ocupado: 311
+                      livre: 352
+                    - id: P5
+                      nome: Cantina
+                      capacidade: 249
+                      ocupado: 191
+                      livre: 58
+                filtrado:
+                  summary: Ocupação filtrada por parque
+                  value:
+                    - id: P1
+                      nome: Publico
+                      capacidade: 663
+                      ocupado: 311
+                      livre: 352
+
+  /parques/occupancy/{parque_name}:
+    get:
+      tags:
+        - Operações
+      summary: Get Occupancy
+      description: Retorna a ocupação de um único parque com base no nome exato (case-insensitive).
+      parameters:
+        - name: parque_name
+          in: path
+          required: true
+          description: Nome do parque.
+          schema:
+            type: string
+            example: Publico
+      responses:
+        '200':
+          description: Ocupação do parque encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LotacaoParque'
+              examples:
+                parqueEncontrado:
+                  summary: Parque encontrado
+                  value:
+                    id: P1
+                    nome: Publico
+                    capacidade: 663
+                    ocupado: 311
+                    livre: 352
+        '404':
+          description: Parque não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                naoEncontrado:
+                  summary: Erro de parque inexistente
+                  value:
+                    error: Parque não encontrado
+                    parque_name: parque-inexistente
+
 components:
   schemas:
     TimestampEntry:
@@ -203,3 +316,67 @@ components:
         - Capacidade
         - Ocupado
         - Livre
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado do serviço.
+          example: ok
+        wsdl:
+          type: string
+          description: Nome/referência do serviço SOAP associado.
+          example: ParquesWS
+        soap_operation:
+          type: string
+          description: Operação SOAP usada para obter os dados.
+          example: Lotacao
+      required:
+        - status
+        - wsdl
+        - soap_operation
+
+    LotacaoParque:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identificador do parque.
+          example: P1
+        nome:
+          type: string
+          description: Nome do parque.
+          example: Publico
+        capacidade:
+          type: integer
+          description: Número total de lugares.
+          example: 663
+        ocupado:
+          type: integer
+          description: Número de lugares ocupados.
+          example: 311
+        livre:
+          type: integer
+          description: Número de lugares livres (pode ser negativo).
+          example: 352
+      required:
+        - id
+        - nome
+        - capacidade
+        - ocupado
+        - livre
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Mensagem de erro.
+          example: Parque não encontrado
+        parque_name:
+          type: string
+          description: Nome do parque enviado no pedido.
+          example: parque-inexistente
+      required:
+        - error
