@@ -8,6 +8,7 @@ info:
     Serviço que converte um feed RSS para JSON.
 
 servers:
+  - url: http://127.0.0.1:8000/rss2json
   - url: http://services.web.ua.pt/rss2json
 
 paths:

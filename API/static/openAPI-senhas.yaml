@@ -8,4 +8,5 @@ info:
     ...
 
 servers:
-  - url: http://services.web.ua.pt/...
+  - url: http://services.web.ua.pt/senhas
+  - url: http://127.0.0.1:8000/senhas
