@@ -40,17 +40,17 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Ementas das Cantinas',
-    image: require('@site/static/img/ementas-icon.svg').default, 
+    title: 'Ementas',
+    image: require('@site/static/img/ementas-icon.png').default, 
     description: (
       <>
-        Este serviço permite obter informação sobre as ementas das diversas cantinas e snack-bar da Universidade de Aveiro.
+        Permite obter informação sobre as ementas das diversas cantinas e snack-bar da Universidade de Aveiro.
       </>
     ),
   },
   {
     title: 'Rss2json',
-    image: require('@site/static/img/ementas-icon.svg').default,
+    image: require('@site/static/img/senhas-icon.svg').default,
     description: (
       <>
         Converte um feed RSS para JSON.
