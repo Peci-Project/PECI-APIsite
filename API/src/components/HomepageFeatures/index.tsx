@@ -14,7 +14,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Edifícios',
-    image: require('@site/static/img/edificios-icon.png').default,
+    image: require('@site/static/img/logo-api.png').default,
     description: (
       <>
         Fornece dados sobre as unidades e os edifícios da Universidade de Aveiro.
@@ -23,7 +23,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Parques de Estacionamento',
-    image: require('@site/static/img/parques-icon.svg').default,
+    image: require('@site/static/img/logo-api.png').default,
     description: (
       <>
         Fornece dados sobre os parques de estacionamento da Universidade de Aveiro.
@@ -32,7 +32,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Senhas dos Serviços Académicos',
-    image: require('@site/static/img/senhas-icon.svg').default,
+    image: require('@site/static/img/logo-api.png').default,
     description: (
       <>
         Permite obter informação sobre o estado das senhas dos Serviços Académicos da Universidade de Aveiro.
@@ -41,7 +41,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Ementas',
-    image: require('@site/static/img/ementas-icon.png').default, 
+    image: require('@site/static/img/logo-api.png').default, 
     description: (
       <>
         Permite obter informação sobre as ementas das diversas cantinas e snack-bar da Universidade de Aveiro.
@@ -50,7 +50,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Rss2json',
-    image: require('@site/static/img/senhas-icon.svg').default,
+    image: require('@site/static/img/logo-api.png').default,
     description: (
       <>
         Converte um feed RSS para JSON.

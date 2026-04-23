@@ -210,8 +210,7 @@ const config: Config = {
           ],
         },
       ],
-      // Mudar o copyright
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Universidade de Aveiro.`,
     },
     prism: {
       theme: prismThemes.github,
