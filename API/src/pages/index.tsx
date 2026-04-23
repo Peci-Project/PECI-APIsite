@@ -17,9 +17,8 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           Documentação API's Universidade de Aveiro
         </Heading>
-        {/* Mudar ou retirar o subtítulo */}
         <p className="hero__subtitle">
-          ...
+          Liga a UA às tuas aplicações
         </p>
         <div className={styles.buttons}>
           <Link
