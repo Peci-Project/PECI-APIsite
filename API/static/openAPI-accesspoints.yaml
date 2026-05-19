@@ -1,0 +1,372 @@
+openapi: 3.0.0
+info:
+  title: Access Points UA API
+  description: |    
+    Esta API permite consultar informações sobre os Access Points da Universidade de Aveiro. Algumas dessas informações incluem o número de conexões ativas, localização (departamento,andar e sala), estado (ativo/inativo) e largura de banda. 
+
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000
+    description: Servidor de desenvolvimento
+
+tags:
+  - name: Home
+    description: Endpoint raiz da API
+  - name: Departments
+    description: Operações relacionadas com departamentos
+  - name: Access Points
+    description: Operações relacionadas com pontos de acesso
+
+paths:
+  /:
+    get:
+      tags:
+        - Home
+      summary: Status da API
+      description: Retorna o estado da API e lista de endpoints disponíveis
+      operationId: getHome
+      responses:
+        '200':
+          description: API funcionando corretamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  endpoints:
+                    type: array
+                    items:
+                      type: string
+
+  /departments:
+    get:
+      tags:
+        - Departments
+      summary: Listar todos os departamentos
+      description: |
+        Retorna uma lista de departamentos com informações sobre conexões.
+        
+        Suporta dois modos:
+        - **Simples** (simple=true): Retorna apenas ID e Nome
+        - **Completo** (padrão): Retorna ID, Nome e total de conexões com filtros opcionais
+      operationId: listDepartments
+      parameters:
+        - name: simple
+          in: query
+          description: Se "true", retorna apenas ID e Nome (mais rápido)
+          schema:
+            type: string
+            enum: ['true', 'false']
+        - name: min_connections
+          in: query
+          description: Filtro - Departamentos com no mínimo N conexões
+          schema:
+            type: integer
+            minimum: 0
+        - name: max_connections
+          in: query
+          description: Filtro - Departamentos com no máximo N conexões
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Lista de departamentos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/DepartmentSimple'
+                    - $ref: '#/components/schemas/DepartmentFull'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /departments/{id}:
+    get:
+      tags:
+        - Departments
+      summary: Obter detalhes de um departamento
+      description: Retorna informações completas sobre um departamento específico
+      operationId: getDepartmentById
+      parameters:
+        - name: id
+          in: path
+          description: ID do departamento
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Departamento encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentFull'
+        '404':
+          description: Departamento não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /departments/{id}/accesspoints:
+    get:
+      tags:
+        - Departments
+      summary: Listar pontos de acesso de um departamento
+      description: Retorna todos os pontos de acesso associados a um departamento
+      operationId: getDepartmentAccessPoints
+      parameters:
+        - name: id
+          in: path
+          description: ID do departamento
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de pontos de acesso do departamento
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessPoint'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /accesspoints:
+    get:
+      tags:
+        - Access Points
+      summary: Listar todos os pontos de acesso
+      description: |
+        Retorna uma lista de pontos de acesso com suporte a múltiplos filtros.
+        
+        Pode combinar vários filtros na query string para pesquisa avançada.
+      operationId: listAccessPoints
+      parameters:
+        - name: floor
+          in: query
+          description: Filtrar por andar (número)
+          schema:
+            type: integer
+        - name: room
+          in: query
+          description: Filtrar por sala (código/nome)
+          schema:
+            type: string
+        - name: is_active
+          in: query
+          description: Filtrar por estado (0=inativo, 1=ativo)
+          schema:
+            type: integer
+            enum: [0, 1]
+        - name: department_id
+          in: query
+          description: Filtrar por ID do departamento
+          schema:
+            type: integer
+        - name: department_name
+          in: query
+          description: Filtrar por nome do departamento
+          schema:
+            type: string
+        - name: min_bandwidth
+          in: query
+          description: Filtro - Largura de banda mínima (Mbps)
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Lista de pontos de acesso retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessPoint'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /accesspoints/{id}:
+    get:
+      tags:
+        - Access Points
+      summary: Obter detalhes de um ponto de acesso
+      description: Retorna informações completas sobre um ponto de acesso específico
+      operationId: getAccessPointById
+      parameters:
+        - name: id
+          in: path
+          description: ID do ponto de acesso
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ponto de acesso encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessPoint'
+        '404':
+          description: Ponto de acesso não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /accesspoints/{id}/department:
+    get:
+      tags:
+        - Access Points
+      summary: Obter departamento de um ponto de acesso
+      description: Retorna informações do departamento ao qual pertence um ponto de acesso
+      operationId: getAccessPointDepartment
+      parameters:
+        - name: id
+          in: path
+          description: ID do ponto de acesso
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Departamento encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentFull'
+        '404':
+          description: Ponto de acesso não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Erro na base de dados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    DepartmentSimple:
+      type: object
+      description: Informações básicas de um departamento
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      example:
+        id: 4
+        name: DETI
+      required:
+        - id
+        - name
+
+    DepartmentFull:
+      type: object
+      description: Informações completas de um departamento
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        total_connections:
+          type: integer
+          description: Total de conexões (somatório de n_connections de todos os access points)
+      required:
+        - id
+        - name
+        - total_connections
+
+    AccessPoint:
+      type: object
+      description: Informações de um ponto de acesso
+      properties:
+        id:
+          type: integer
+        department_id:
+          type: integer
+        floor:
+          type: integer
+          description: Andar onde está localizado o ponto de acesso
+        room:
+          type: string
+          description: Sala onde está localizado o ponto de acesso
+        n_connections:
+          type: integer
+          description: Número de conexões ativas
+        max_connections:
+          type: integer
+          description: Número máximo de conexões suportadas
+        coverage_radius_m:
+          type: number
+          format: float
+          description: Raio de cobertura em metros
+        is_active:
+          type: integer
+          description: Estado do ponto de acesso (0=inativo, 1=ativo)
+          enum: [0, 1]
+        max_bandwidth_mbps:
+          type: number
+          format: float
+          description: Largura de banda máxima em Mbps
+        ip_address:
+          type: string
+          description: Endereço IP do dispositivo
+      additionalProperties: true
+      example:
+        id: 1
+        ip_address: 192.168.63.62
+        floor: 2
+        room: 2
+        n_connections: 12
+        max_connections: 61
+        coverage_radius_m: 15.0
+        max_bandwidth_mbps: 1200.0
+        is_active: 1
+        department_id: 4
+      required:
+        - id
+        - department_id
+        - floor
+        - room
+        - n_connections
+        - is_active
+        - max_bandwidth_mbps
+

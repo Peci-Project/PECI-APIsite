@@ -151,11 +151,24 @@ const config: Config = {
           ...commonScalarConfig,
         },
       } as ScalarOptions,
-    ],
+    ],[
+      '@scalar/docusaurus',
+      {
+        id: 'access-point',
+        label: 'Access Point',
+        route: '/api/access',
+        showNavLink: false,
+        configuration: {
+          url: `${baseUrl}openAPI-accesspoints.yaml`,
+          metaData: { title: 'Access Point', },
+          proxyUrl: 'https://proxy-api-orcin.vercel.app/api/proxy',
+          ...commonScalarConfig,
+        },
+      } as ScalarOptions,
+    ]
   ],
 
   themeConfig: {
-    // Alterar o social card
     image: 'img/social-card.png',
     colorMode: {
       respectPrefersColorScheme: true,
@@ -167,7 +180,6 @@ const config: Config = {
         src: 'img/ua.png',
       },
       items: [
-        /* Dropdown de serviços na nav bar */
         {
           type: 'dropdown',
           label: "Serviços",
@@ -178,6 +190,7 @@ const config: Config = {
           { label: 'Senhas', to: '/api/senhas' },
           { label: 'Ementas', to: '/api/ementas' },
           { label: 'Rss2json', to: '/api/rss2json' },
+          { label: 'Access Point', to: '/api/access' },
           ]
         }
       ],
@@ -206,6 +219,10 @@ const config: Config = {
             {
               label: 'Rss2json',
               to: '/api/rss2json',
+            },
+            {
+              label: 'Access Point',
+              to: '/api/access',
             },
           ],
         },
