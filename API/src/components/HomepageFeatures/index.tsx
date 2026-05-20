@@ -12,6 +12,7 @@ type FeatureItem = {
 
 /* Mudar as imagens */
 const FeatureList: FeatureItem[] = [
+  /*
   {
     title: 'Edifícios',
     image: require('@site/static/img/logo-api.png').default,
@@ -21,6 +22,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  */
   {
     title: 'Parques de Estacionamento',
     image: require('@site/static/img/logo-api.png').default,
@@ -30,6 +32,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  /*
   {
     title: 'Senhas dos Serviços Académicos',
     image: require('@site/static/img/logo-api.png').default,
@@ -39,6 +42,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  */
   {
     title: 'Ementas',
     image: require('@site/static/img/logo-api.png').default, 

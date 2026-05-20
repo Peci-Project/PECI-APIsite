@@ -77,6 +77,7 @@ const config: Config = {
   
   plugins: [
     /* Lista de serviços */
+    /*
     [
       '@scalar/docusaurus',
       {
@@ -92,6 +93,7 @@ const config: Config = {
         },
       } as ScalarOptions,    
     ],
+    */
     [
       '@scalar/docusaurus',
       {
@@ -107,6 +109,7 @@ const config: Config = {
         },
       } as ScalarOptions,
     ],
+    /*
     [
       '@scalar/docusaurus',
       {
@@ -122,6 +125,7 @@ const config: Config = {
         },
       } as ScalarOptions,    
     ],
+    */
     [
     '@scalar/docusaurus',
       {
@@ -173,9 +177,9 @@ const config: Config = {
           label: "Serviços",
           position: 'left',
           items: [
-          { label: 'Edifícios', to: '/api/edificios' },
+          //{ label: 'Edifícios', to: '/api/edificios' },
           { label: 'Parques', to: '/api/parques' },
-          { label: 'Senhas', to: '/api/senhas' },
+          //{ label: 'Senhas', to: '/api/senhas' },
           { label: 'Ementas', to: '/api/ementas' },
           { label: 'Rss2json', to: '/api/rss2json' },
           ]
@@ -187,18 +191,22 @@ const config: Config = {
         {
           title: "API's",
           items: [
+            /*
             {
               label: 'Edifícios',
               to: '/api/edificios',
             },
+            */
             {
               label: 'Parques',
               to: '/api/parques',
             },
+            /*
             {
               label: 'Senhas',
               to: '/api/senhas',
             },
+            */
             {
               label: 'Ementas',
               to: '/api/ementas',

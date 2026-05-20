@@ -12,11 +12,11 @@ info:
       - **Filtros:** Filtra resultados por parques específicos (como o P1 ou P5) ou por locais que ainda têm lugares livres.
 
 servers:
-  - url: http://127.0.0.1:8000/parques
-  - url: http://services.web.ua.pt/parques
+  - url: http://localhost:8280/parques/1.0.0
+  - url: http://services.web.ua.pt
 
 paths:
-  /parques:
+  /parques/parques:
     get:
       tags:
         - Operações

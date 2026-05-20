@@ -8,11 +8,11 @@ info:
     Serviço que converte um feed RSS para JSON.
 
 servers:
-  - url: http://127.0.0.1:8000/rss2json
-  - url: http://services.web.ua.pt/rss2json
+  - url: http://localhost:8280/rss2json/1.0.0
+  - url: http://services.web.ua.pt
 
 paths:
-  /:
+  /rss2json:
     get:
       summary: Converter RSS para JSON
       description: Devolve um ficheiro JSON com o conteúdo do feed RSS especificado.
@@ -23,3 +23,8 @@ paths:
           description: URL do feed RSS a converter (codificado).
           schema:
             type: string
+        - name: callback
+          in: query
+          description: Callback para JSONP (opcional).
+          schema:
+            type: boolean

@@ -8,11 +8,11 @@ info:
     Serviço RESTful que permite obter o menu das cantinas, snack-bares e restaurantes da Universidade de Aveiro.
 
 servers:
-  - url: http://127.0.0.1:8000/sas
-  - url: http://services.web.ua.pt/sas
+  - url: http://localhost:8280/sas/1.0.0
+  - url: http://services.web.ua.pt
 
 paths:
-  /ementas:
+  /sas/ementas:
     get:
       tags: 
         - Operações
