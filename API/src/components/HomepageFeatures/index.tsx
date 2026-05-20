@@ -61,6 +61,15 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  {    
+    title: 'Access Point',
+    image: require('@site/static/img/logo-api.png').default,
+    description: (
+      <>
+        Permite obter informação dos Acess Points da Universidade de Aveiro.
+      </>
+    ),
+  },
 ];
 
 function Feature({title, image, description}: FeatureItem) {
