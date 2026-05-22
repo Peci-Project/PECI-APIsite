@@ -28,3 +28,13 @@ paths:
           description: Callback para JSONP (opcional).
           schema:
             type: boolean
+
+# components:
+#   securitySchemes:
+#     bearerAuth:
+#       type: http
+#       scheme: bearer
+#       bearerFormat: JWT
+
+# security:
+#   - bearerAuth: []

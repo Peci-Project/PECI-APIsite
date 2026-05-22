@@ -185,18 +185,28 @@ const config: Config = {
       },
       items: [
         {
-          type: 'dropdown',
-          label: "Serviços",
+          type: 'custom-ProtectedDropdown', // Substitui o 'dropdown' normal por este
+          label: 'Serviços',
           position: 'left',
           items: [
-          //{ label: 'Edifícios', to: '/api/edificios' },
-          { label: 'Parques', to: '/api/parques' },
-          //{ label: 'Senhas', to: '/api/senhas' },
-          { label: 'Ementas', to: '/api/ementas' },
-          { label: 'Rss2json', to: '/api/rss2json' },
-          { label: 'Access Point', to: '/api/access' },
+            // Public
+            { label: 'Parques', to: '/api/parques' },
+            { label: 'Ementas', to: '/api/ementas' },
+            
+            // Private
+            { 
+              label: 'Rss2json', 
+              to: '/api/rss2json',
+              customProps: { allowedRoles: ['admin_role', 'publisher_role'] } 
+            },
+            { 
+              label: 'Access Point', 
+              to: '/api/access',
+              customProps: { allowedRoles: ['admin_role', 'publisher_role', 'subscriber_role'] } 
+            }
           ]
-        }
+        },
+        { type: 'custom-LoginButton', position: 'right' }
       ],
     },
     footer: {

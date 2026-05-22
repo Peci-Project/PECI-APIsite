@@ -96,3 +96,13 @@ paths:
   #       - Operações
   #     summary: Dump
   #     description: Permite obter todos os dados sobre as ementas desde o dia 19 de Dezembro de 2011, em formato CSV.
+
+# components:
+#   securitySchemes:
+#     bearerAuth:
+#       type: http
+#       scheme: bearer
+#       bearerFormat: JWT
+
+# security:
+#   - bearerAuth: []

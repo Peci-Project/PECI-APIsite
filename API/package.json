@@ -18,8 +18,10 @@
     "@docusaurus/core": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@mdx-js/react": "^3.0.0",
+    "@react-keycloak/web": "^3.4.0",
     "@scalar/docusaurus": "^0.7.44",
     "clsx": "^2.0.0",
+    "keycloak-js": "^26.2.4",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

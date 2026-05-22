@@ -369,3 +369,12 @@ components:
         - is_active
         - max_bandwidth_mbps
 
+# components:
+#   securitySchemes:
+#     bearerAuth:
+#       type: http
+#       scheme: bearer
+#       bearerFormat: JWT
+
+# security:
+#   - bearerAuth: []

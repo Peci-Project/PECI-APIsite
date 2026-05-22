@@ -3,11 +3,13 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
+import { useKeycloak } from '@react-keycloak/web';
 
 type FeatureItem = {
   title: string;
   image: React.ComponentType<React.ComponentProps<'svg'>> | string;
   description: ReactNode;
+  allowedRoles?: string[];
 };
 
 /* Mudar as imagens */
@@ -60,6 +62,7 @@ const FeatureList: FeatureItem[] = [
         Converte um feed RSS para JSON.
       </>
     ),
+    allowedRoles: ['admin']
   },
   {    
     title: 'Access Point',
@@ -69,6 +72,7 @@ const FeatureList: FeatureItem[] = [
         Permite obter informação dos Acess Points da Universidade de Aveiro.
       </>
     ),
+    allowedRoles: ['admin']
   },
 ];
 
@@ -102,11 +106,23 @@ function Feature({title, image, description}: FeatureItem) {
 }
 
 export default function HomepageFeatures(): ReactNode {
+  const { keycloak, initialized } = useKeycloak();
+
+  const userRoles = (initialized && keycloak.authenticated)
+    ? keycloak.tokenParsed?.realm_access?.roles || [] 
+    : [];
+
+  const filteredFeatures = FeatureList.filter((feature) => {
+    if (!feature.allowedRoles || feature.allowedRoles.length === 0) return true;
+    
+    return feature.allowedRoles.some(role => userRoles.includes(role));
+  });
+
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
+          {filteredFeatures.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
         </div>
