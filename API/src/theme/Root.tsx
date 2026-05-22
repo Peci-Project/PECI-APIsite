@@ -49,7 +49,7 @@ export default function Root({children}: {children: React.ReactNode}) {
   }
 
   const keycloak = new Keycloak({
-    url: 'http://localhost:8080/',
+    url: 'http://localhost:8080',
     realm: 'ua',
     clientId: 'wso2'
   });

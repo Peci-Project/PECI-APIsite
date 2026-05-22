@@ -62,7 +62,7 @@ const FeatureList: FeatureItem[] = [
         Converte um feed RSS para JSON.
       </>
     ),
-    allowedRoles: ['admin']
+    allowedRoles: ['admin_role', 'publisher_role']
   },
   {    
     title: 'Access Point',
@@ -72,7 +72,7 @@ const FeatureList: FeatureItem[] = [
         Permite obter informação dos Acess Points da Universidade de Aveiro.
       </>
     ),
-    allowedRoles: ['admin']
+    allowedRoles: ['admin_role', 'publisher_role', 'subscriber_role']
   },
 ];
 
