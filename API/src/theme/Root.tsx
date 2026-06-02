@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web';
 import Keycloak from 'keycloak-js';
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'; // <-- Importante
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 function GlobalTokenInjector({ children }: { children: React.ReactNode }) {
   const { keycloak, initialized } = useKeycloak();

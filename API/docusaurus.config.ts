@@ -185,7 +185,7 @@ const config: Config = {
       },
       items: [
         {
-          type: 'custom-ProtectedDropdown', // Substitui o 'dropdown' normal por este
+          type: 'custom-ProtectedDropdown',
           label: 'Serviços',
           position: 'left',
           items: [

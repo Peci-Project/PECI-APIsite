@@ -1,8 +1,9 @@
 import React from 'react';
 import DropdownNavbarItem from '@theme-original/NavbarItem/DropdownNavbarItem';
 import { useKeycloak } from '@react-keycloak/web';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function ProtectedDropdown(props: any) {
+function Dropdown(props: any) {
   const { keycloak, initialized } = useKeycloak();
 
   const userRoles = keycloak.authenticated 
@@ -21,4 +22,12 @@ export default function ProtectedDropdown(props: any) {
   if (filteredItems.length === 0) return null;
 
   return <DropdownNavbarItem {...props} items={filteredItems} />;
+}
+
+export default function ProtectedDropdown(props: any) {
+  return (
+    <BrowserOnly fallback={null}>
+      {() => <Dropdown {...props} />}
+    </BrowserOnly>
+  );
 }

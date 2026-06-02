@@ -1,7 +1,8 @@
 import React from 'react';
 import { useKeycloak } from '@react-keycloak/web';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function LoginButton() {
+function LoginButtonInternal() {
   const { keycloak, initialized } = useKeycloak();
 
   if (!initialized) {
@@ -22,5 +23,19 @@ export default function LoginButton() {
     >
       {keycloak.authenticated ? `Sair - ${nomeUtilizador}` : 'Iniciar Sessão'}
     </button>
+  );
+}
+
+export default function LoginButton() {
+  return (
+    <BrowserOnly 
+      fallback={
+        <button className="button button--secondary" style={{ margin: '8px 16px' }} disabled>
+          A ligar...
+        </button>
+      }
+    >
+      {() => <LoginButtonInternal />}
+    </BrowserOnly>
   );
 }
