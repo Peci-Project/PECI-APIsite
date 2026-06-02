@@ -4,6 +4,7 @@ import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 import { useKeycloak } from '@react-keycloak/web';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type FeatureItem = {
   title: string;
@@ -105,7 +106,7 @@ function Feature({title, image, description}: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): ReactNode {
+function HomepageFeaturesInternal(): ReactNode {
   const { keycloak, initialized } = useKeycloak();
 
   const userRoles = (initialized && keycloak.authenticated)
@@ -128,5 +129,13 @@ export default function HomepageFeatures(): ReactNode {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function HomepageFeatures(): ReactNode {
+  return (
+    <BrowserOnly fallback={<div className="text--center">A carregar serviços...</div>}>
+      {() => <HomepageFeaturesInternal />}
+    </BrowserOnly>
   );
 }
