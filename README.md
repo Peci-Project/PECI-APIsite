@@ -75,11 +75,3 @@ PECI-APIsite
 │   └── tsconfig.json
 └── README.md
 ```
-
-# TODO
-
-- Completar documentação da API das ementas;
-- Escrever a documentação das restantes API's;
-- Colocar os testes a funcionar;
-- Mudar as imagens;
-- Fazer o modo pt e en.
